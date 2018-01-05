@@ -122,7 +122,7 @@ other files (like the "-interface" or frontend files).
 
 13. Add the following tasks to gulpfile:
 
-    1. Import `gulp`, `browserify`, `viny-source-stream`, and `babelify` at top of gulp file:
+    1. Import `gulp`, `browserify`, `vinyl-source-stream`, and `babelify` at top of gulp file:
         ```
         var gulp = require('gulp');
         var browserify = require('browserify');
