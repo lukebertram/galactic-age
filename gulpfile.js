@@ -10,13 +10,15 @@ var del = require('del');
 var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync').create();
 var lib = require('bower-files') ({
- "overrides":{
-   "main": [
-     "less/bootstrap.less",
-     "dist/css/bootstrap.css",
-     "dist/js/bootstrap.js"
-   ]
- }
+  "overrides" : {
+    "bootstrap" : {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
+  }
 });
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
@@ -30,7 +32,7 @@ var sourcemaps = require('gulp-sourcemaps');
   // transpiles it from es6, browserifies it and saves it in
   // build/js/app.js
 gulp.task('jsBrowserify', ['concatInterface'], function() {
-  return browserify({ entries: ['.tmp/allConcat.js']})
+  return browserify({ entries: ['./tmp/allConcat.js']})
     .transform(babelify.configure({
       presets: ["es2015"]
     }))

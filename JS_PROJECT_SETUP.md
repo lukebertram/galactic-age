@@ -132,7 +132,7 @@ other files (like the "-interface" or frontend files).
       Add `jsBrowserify` task to gulpfile:
         ```
         gulp.task('jsBrowserify', ['concatInterface'], function() {
-          return browserify({ entries: ['.tmp/allConcat.js']})
+          return browserify({ entries: ['./tmp/allConcat.js']})
             .transform(babelify.configure({
               presets: ["es2015"]
             }))
@@ -191,12 +191,14 @@ other files (like the "-interface" or frontend files).
       ```
       var browserSync = require('browser-sync').create();
       var lib = require('bower-files') ({
-        "overrides":{
-          "main": [
-            "less/bootstrap.less",
-            "dist/css/bootstrap.css",
-            "dist/js/bootstrap.js"
-          ]
+        "overrides" : {
+          "bootstrap" : {
+            "main": [
+              "less/bootstrap.less",
+              "dist/css/bootstrap.css",
+              "dist/js/bootstrap.js"
+            ]
+          }
         }
       });
       var sass = require('gulp-sass');
