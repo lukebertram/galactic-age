@@ -24,7 +24,9 @@ var sourcemaps = require('gulp-sourcemaps');
 
 //GULP TASKS -------------
 
-//'$ gulp jsBrowserify' takes pre-concatenated file from tmp/ dir,
+//'$ gulp jsBrowserify'
+  // runs concatInterface gulp task first
+  // takes pre-concatenated file from tmp/ dir,
   // transpiles it from es6, browserifies it and saves it in
   // build/js/app.js
 gulp.task('jsBrowserify', ['concatInterface'], function() {
@@ -47,6 +49,7 @@ gulp.task('concatInterface', function(){
  });
 
 //'$ gulp minifyScripts'
+  // runs jsBrowserify task first
   //optimizes app.js file for browsers by removing whitespace/comments
 gulp.task('minifyScripts', ['jsBrowserify'], function() {
  return gulp.src('build/js/app.js')
@@ -93,6 +96,7 @@ gulp.task('bowerCSS', function(){
 });
 
 //'$ gulp cssConcat'
+  // runs bowerCSS and cssBuild gulp tasks first
   // concatenates the css files contained in the build dir into a single
   // file called 'build.css' located in the build/css/ directory.
 gulp.task('cssConcat', ['bowerCSS', 'cssBuild'], function() {
@@ -103,6 +107,7 @@ gulp.task('cssConcat', ['bowerCSS', 'cssBuild'], function() {
 });
 
 //'$ gulp build'
+  // runs 'clean' gulp task first
   // if '--production' flag is used, runs minifyScripts in addition to
   // jsBrowserify and bower. Otherwise minifyScripts is not run.
 gulp.task('build', ['clean'], function(){
@@ -123,4 +128,36 @@ gulp.task('cssBuild', function() {
    .pipe(sass().on('error', sass.logError))
    .pipe(sourcemaps.write())
    .pipe(gulp.dest('./build/css'))
+});
+
+//'$ gulp serve'
+  // starts a development server which watches all the files of the
+  // project for changes. When a changed file is saved, the server
+  // rebuilds the necessary parts of the project and refreshed the
+  // browser window.
+gulp.task('serve', function() {
+ browserSync.init({
+   server: {
+     baseDir: "./",
+     index: "index.html"
+   }
+ });
+
+ gulp.watch(['js/*.js'], ['jsBuild']);
+ gulp.watch(['bower.json'], ['bowerBuild']);
+ gulp.watch(['*.html'], ['htmlBuild']);
+ gulp.watch(['scss/*.scss', 'scss/**/*.scss'], ['cssConcat']);
+
+});
+
+gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
+ browserSync.reload();
+});
+
+gulp.task('bowerBuild', ['bower'], function(){
+ browserSync.reload();
+});
+
+gulp.task('htmlBuild', function(){
+ browserSync.reload();
 });
