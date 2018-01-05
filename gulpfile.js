@@ -8,6 +8,19 @@ var utilities = require('gulp-util');
 var buildProduction = utilities.env.production;
 var del = require('del');
 var jshint = require('gulp-jshint');
+var browserSync = require('browser-sync').create();
+var lib = require('bower-files') ({
+ "overrides":{
+   "main": [
+     "less/bootstrap.less",
+     "dist/css/bootstrap.css",
+     "dist/js/bootstrap.js"
+   ]
+ }
+});
+var sass = require('gulp-sass');
+var sourcemaps = require('gulp-sourcemaps');
+
 
 //GULP TASKS -------------
 
@@ -54,4 +67,60 @@ gulp.task('jshint', function(){
   return gulp.src(['js/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+});
+
+//'$ gulp bower'
+  // runs bower subtasks
+gulp.task('bower', ['bowerJS', 'cssConcat']);
+
+//'$ gulp bowerJS'
+  // concatenates front-end dependency js files into a single minified
+  // js file called 'vendor.min.js', located in build/js/ dir.
+gulp.task('bowerJS', function() {
+ return gulp.src(lib.ext('js').files)
+   .pipe(concat('vendor.min.js'))
+   .pipe(uglify())
+   .pipe(gulp.dest('./build/js'));
+});
+
+//'$ gulp bowerCSS'
+  // concatenates bower-managed dependency css files (bootstrap) into
+  // a single file called 'vendor.css' located in the build/css/ dir.
+gulp.task('bowerCSS', function(){
+ return gulp.src(lib.ext('css').files)
+   .pipe(concat('vendor.css'))
+   .pipe(gulp.dest('./build/css'));
+});
+
+//'$ gulp cssConcat'
+  // concatenates the css files contained in the build dir into a single
+  // file called 'build.css' located in the build/css/ directory.
+gulp.task('cssConcat', ['bowerCSS', 'cssBuild'], function() {
+ return gulp.src(['./build/css/vendor.css', './build/css/main.css'])
+   .pipe(concat('build.css'))
+   .pipe(gulp.dest('./build/css'))
+   .pipe(browserSync.stream());
+});
+
+//'$ gulp build'
+  // if '--production' flag is used, runs minifyScripts in addition to
+  // jsBrowserify and bower. Otherwise minifyScripts is not run.
+gulp.task('build', ['clean'], function(){
+ if (buildProduction) {
+   gulp.start('minifyScripts');
+ } else {
+   gulp.start('jsBrowserify');
+ }
+ gulp.start('bower');
+});
+
+//'$ gulp cssBuild'
+  // builds a single CSS file from the main.scss file located in the
+  // scss/ directory (also includes all scss files imported by main.scss)
+gulp.task('cssBuild', function() {
+ return gulp.src('./scss/main.scss')
+   .pipe(sourcemaps.init())
+   .pipe(sass().on('error', sass.logError))
+   .pipe(sourcemaps.write())
+   .pipe(gulp.dest('./build/css'))
 });
