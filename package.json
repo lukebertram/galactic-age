@@ -4,7 +4,7 @@
   "description": "a program that calculates the user's age in years on other planets of our solar system",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
