@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var utilities = require('gulp-util');
 var buildProduction = utilities.env.production;
 var del = require('del');
+var jshint = require('gulp-jshint');
 
 //GULP TASKS -------------
 
@@ -45,4 +46,12 @@ gulp.task('minifyScripts', ['jsBrowserify'], function() {
   // old/unwanted versions of files
 gulp.task('clean', function(){
  return del(['build', 'tmp']);
+});
+
+//'$ gulp jshint'
+  // runs all javascript files through linter to find syntax errors
+gulp.task('jshint', function(){
+  return gulp.src(['js/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });

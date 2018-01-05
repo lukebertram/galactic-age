@@ -183,7 +183,7 @@ other files (like the "-interface" or frontend files).
       gulp.task('jshint', function(){
         return gulp.src(['js/*.js'])
           .pipe(jshint())
-          .pipe(jshint.reporter('defualt'));
+          .pipe(jshint.reporter('default'));
       });
       ```
 
