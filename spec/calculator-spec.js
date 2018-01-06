@@ -13,10 +13,11 @@ describe('GalacticCalculator', function() {
 
   it('should convert an age in years to an age in seconds', function() {
     // 10 years * 365 days * 24 hours * 60 minutes * 60 seconds
-    const tenYears = 10 * 364 * 24 * 60 * 60;
+    const tenYears = ((10 * 365)+2) * 24 * 60 * 60;
     console.log(`Here comes a test statement:`);
-    console.log(moment.duration(10, 'years').asSeconds());
-    expect(moment.duration(10, 'years').seconds()).toEqual(tenYears);
+    console.log(moment.duration(10, 'years').asSeconds() + "seconds - from Moment.js");
+    console.log( (((10 * 365)+2) * 24 * 60) + "seconds");
+    expect(moment.duration(10, 'years').asSeconds()).toEqual(tenYears);
     expect(spaceCalc.yearsToSeconds(10)).toEqual(tenYears);
   });
 
