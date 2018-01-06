@@ -5,7 +5,7 @@ export class GalacticCalculator{
 
   }
 
-  // accepts amount of time in years (integer) and returns conversion to seconds
+  // accepts amount of time in years (integer) and returns converted to seconds
   yearsToSeconds(integer){
     const output = moment.duration(integer, 'years').asSeconds();
     console.log(output)
