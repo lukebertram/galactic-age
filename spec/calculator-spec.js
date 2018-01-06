@@ -6,9 +6,9 @@ describe('GalacticCalculator', function() {
   //instantiate a calculator to use in tests
   const spaceCalc = new GalacticCalculator();
 
-  // it('should successfully import and use moment.js functions', function(){
-  //     expect(moment.now());
-  // });
+  it('should have a default skin of "hot pink"', function(){
+      expect(spaceCalc.skin).toEqual('hot pink');
+  });
 
   it('should convert an age in years to an age in seconds', function() {
     // 10 years * 365 days (+2 for leapyears?)* 24 hours * 60 minutes * 60 seconds
