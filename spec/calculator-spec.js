@@ -27,8 +27,15 @@ describe('GalacticCalculator', function() {
     //now write the test using the calculator object
   });
 
-  it('should', function(){
+  it('should accept 1 date and return the diff between it and now in seconds', function(){
+    const dateA = "1984-02-10";
+    const diffNow = Math.abs(moment(dateA).diff(moment(), 'seconds'));
+    expect(spaceCalc.secBetween(dateA)).toBeCloseTo(diffNow, -1);
+  });
 
+  it('should match numbers that differ only in ones decimal place', function(){
+    expect(10).toBeCloseTo(25, -2);
+    expect(10).not.toBeCloseTo(25, -1);
   });
 
 });
