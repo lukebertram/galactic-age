@@ -18,13 +18,17 @@ describe('GalacticCalculator', function() {
   });
 
   it('should accept 2 dates and return the diff between them in seconds', function(){
-    const dateA = moment("1985-10-26 01:21");
-    const dateB = moment("1985-10-26 01:22");
-    const diff = Math.abs(dateA.diff(dateB, 'seconds'));
-    expect(diff).toEqual(60);
+    const dateA = "1985-10-25";
+    const dateB = "1985-10-26";
+    const daySec = 60 * 60 * 24; //number of seconds in 24hrs
+    // const diff = Math.abs(dateA.diff(dateB, 'seconds'));
+    const diff = spaceCalc.secBetween(dateA, dateB);
+    expect(diff).toEqual(daySec);
     //now write the test using the calculator object
   });
 
-  it('should')
+  it('should', function(){
+
+  });
 
 });
