@@ -1,8 +1,8 @@
 import moment from 'moment';
 
 export class GalacticCalculator{
-  constructor(skin){
-    this.skin = skin || 'hot pink';
+  constructor(dateOfBirth){
+    this.dateOfBirth = dateOfBirth;
   };
 
   // accepts amount of time in years (integer) and returns converted to seconds
@@ -21,7 +21,8 @@ export class GalacticCalculator{
     return Math.abs(momentA.diff(momentB, 'seconds'));
   };
 
-  planetAge(birthDate, planet){
+  planetAge(planet, dateOfBirth){
+    const birthDate = dateOfBirth || this.dateOfBirth;
     const earthAgeSec = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
     let planetAge;
     switch (planet) {
