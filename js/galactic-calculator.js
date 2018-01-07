@@ -73,8 +73,8 @@ export class GalacticCalculator{
   renderDataBox(label, data){
     return `
       <div class="data-box">
-        <span class="label">${label}</span>
-        <span class="data">${data}</span>
+        <div class="label">${label}</div>
+        <div class="data">${data}</div>
       </div>
       `;
   }

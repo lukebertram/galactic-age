@@ -6,8 +6,10 @@ $(document).ready(function(){
     $('#output-display').empty();
 
     const dob = $('#user-age').val();
-    const calc = new GalacticCalculator(dob);
-
-    $('#output-display').append(calc.render());
+    //render data if user-age is not blank
+    if (dob){
+      const calc = new GalacticCalculator(dob);
+      $('#output-display').append(calc.render());
+    };
   });
 });
