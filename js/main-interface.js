@@ -1,5 +1,4 @@
 import {GalacticCalculator} from './../js/galactic-calculator.js';
-// import moment from 'moment';
 
 $(document).ready(function(){
   $('#age-submission').submit(function(event){

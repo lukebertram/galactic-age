@@ -6,7 +6,7 @@
 
 ## Description
 
-Aside from an exercise in project architecture and dev-environment setup, this app utilizes Moment.js to calculate the user's age on planets with shorter or longer years than earth.
+Aside from an exercise in project architecture and dev-environment setup, this app imports and utilizes Moment.js to help calculate the user's age on planets with shorter or longer years than earth.
 
 ## Setup/Installation Requirements
 
@@ -53,7 +53,7 @@ The requested behaviors of this project are listed below. Each behavior was writ
 
 8. Life expectancy, planet => Life expectancy in specified planet years
 
-9. If a user has already surpassed their expected life span, return a message stating this as well as the amount of time by which they have surpassed their life expectancy?
+9. If a user has already surpassed their expected life span, return a message stating this as well as the amount of time by which they have surpassed their life expectancy? (this spec just seems like a mean way of reminding the elderly that they should be dead on other worlds as well as this one)
 
 
 ## Known Bugs
