@@ -7,7 +7,14 @@ describe('GalacticCalculator', function() {
   const spaceCalc = new GalacticCalculator("1985-10-26");
 
   it('should have a default birth date of "1985-10-26"', function(){
-      expect(spaceCalc.dateOfBirth).toEqual("1985-10-26");
+    expect(spaceCalc.dateOfBirth).toEqual("1985-10-26");
+  });
+
+  it('should generate its properties dynamically based on date of birth', function(){
+    expect(spaceCalc.ageMercury).not.toBeUndefined();
+    expect(spaceCalc.ageMercury).toEqual(spaceCalc.planetAge('Mercury'));
+    expect(spaceCalc.ageMercury).not.toBeUndefined();
+    expect(spaceCalc.ageMercury).not.toBeUndefined();
   });
 
   it('should convert an age in years to an age in seconds', function() {

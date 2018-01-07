@@ -2,7 +2,17 @@ import moment from 'moment';
 
 export class GalacticCalculator{
   constructor(dateOfBirth){
+    this.planets = ['Mercury', 'Venus', 'Mars', 'Jupiter'];
     this.dateOfBirth = dateOfBirth;
+    this.ageSeconds = this.secBetween(this.dateOfBirth);
+
+    // this.ageMercury = planetAge(this.planets[0]);
+    // this.ageVenus = planetAge(this.planets[1]);
+    // this.ageMars = planetAge(this.planets[2]);
+    // this.ageJupiter = planetAge(this.planets[3]);
+    this.planets.forEach((planet)=> {
+      this["age"+planet] = this.planetAge(planet);
+    });
   };
 
   // accepts amount of time in years (integer) and returns converted to seconds
@@ -49,4 +59,12 @@ export class GalacticCalculator{
 
     return planetAge;
   };
+
+  //returns the markup to render data
+  getDisplay(){
+    return `
+      <h1>Galactic Data Dump!</h1>
+      <
+      `;
+  }
 }
