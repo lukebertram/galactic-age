@@ -17,10 +17,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var GalacticCalculator = exports.GalacticCalculator = function () {
-  function GalacticCalculator(skin) {
+  function GalacticCalculator(dateOfBirth) {
+    var _this = this;
+
     _classCallCheck(this, GalacticCalculator);
 
-    this.skin = skin || 'hot pink';
+    this.planets = ['Mercury', 'Venus', 'Mars', 'Jupiter'];
+    this.dateOfBirth = dateOfBirth;
+    this.ageSeconds = this.secBetween(this.dateOfBirth);
+
+    // this.ageMercury = planetAge(this.planets[0]);
+    // this.ageVenus = planetAge(this.planets[1]);
+    // this.ageMars = planetAge(this.planets[2]);
+    // this.ageJupiter = planetAge(this.planets[3]);
+    this.planets.forEach(function (planet) {
+      _this["age" + planet] = _this.planetAge(planet);
+    });
   }
 
   _createClass(GalacticCalculator, [{
@@ -47,24 +59,25 @@ var GalacticCalculator = exports.GalacticCalculator = function () {
     }
   }, {
     key: 'planetAge',
-    value: function planetAge(birthDate, planet) {
+    value: function planetAge(planet, dateOfBirth) {
+      var birthDate = dateOfBirth || this.dateOfBirth;
       var earthAgeSec = Math.abs((0, _moment2.default)(birthDate).diff((0, _moment2.default)(), 'seconds'));
       var planetAge = void 0;
       switch (planet) {
         case 'Mercury':
-          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() * 0.24;
+          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() / 0.24;
           break;
 
         case 'Venus':
-          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() * 0.62;
+          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() / 0.62;
           break;
 
         case 'Mars':
-          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() * 1.88;
+          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() / 1.88;
           break;
 
         case 'Jupiter':
-          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() * 11.86;
+          planetAge = _moment2.default.duration(earthAgeSec, 'seconds').asYears() / 11.86;
           break;
 
         default:
@@ -73,6 +86,26 @@ var GalacticCalculator = exports.GalacticCalculator = function () {
       }
 
       return planetAge;
+    }
+  }, {
+    key: 'render',
+
+
+    //returns the markup to render data
+    value: function render() {
+      var _this2 = this;
+
+      var output = '<h1>Galactic Data Dump!</h1>';
+      output += this.renderDataBox('Age in Seconds: ', this.ageSeconds);
+      this.planets.forEach(function (planet) {
+        output += _this2.renderDataBox('Age in ' + planet + ' Years: ', _this2['age' + planet]);
+      });
+      return output;
+    }
+  }, {
+    key: 'renderDataBox',
+    value: function renderDataBox(label, data) {
+      return '\n      <div class="data-box">\n        <div class="label">' + label + '</div>\n        <div class="data">' + data + '</div>\n      </div>\n      ';
     }
   }]);
 
@@ -4623,10 +4656,15 @@ var _galacticCalculator = require('./../js/galactic-calculator.js');
 
 $(document).ready(function () {
   $('#age-submission').submit(function (event) {
-
     event.preventDefault();
+    $('#output-display').empty();
+
     var dob = $('#user-age').val();
-    console.log("form value: " + dob);
+    //render data if user-age is not blank
+    if (dob) {
+      var calc = new _galacticCalculator.GalacticCalculator(dob);
+      $('#output-display').append(calc.render());
+    };
   });
 });
 
