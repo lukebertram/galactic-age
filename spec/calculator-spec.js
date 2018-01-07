@@ -80,11 +80,11 @@ describe('GalacticCalculator', function() {
   });
 
   it('should return life expectancy (duration in years) based on date of birth', function() {
-    expect();
+    expect(false).toEqual(true);
   });
 
   it('should return life expectancy in years of the selected planet', function() {
-    expect();
+    expect(false).toEqual(true);
   });
 
 });

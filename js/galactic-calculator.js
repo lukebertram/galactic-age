@@ -30,15 +30,15 @@ export class GalacticCalculator{
         break;
 
       case 'Venus':
-        planetAge = "venus";
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 0.62;
         break;
 
       case 'Mars':
-        planetAge = "mars";
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 1.88;
         break;
 
       case 'Jupiter':
-        planetAge = "jupiter";
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 11.86;
         break;
 
       default:
