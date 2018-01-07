@@ -38,4 +38,39 @@ describe('GalacticCalculator', function() {
     expect(10).not.toBeCloseTo(25, -1);
   });
 
+  it('should convert a duration in earth years to a duration in Mercury years', function() {
+    const birthDate = '1984-02-10';
+    const planet = 'Mercury';
+    const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
+    const ageInYears = moment.duration(age, 'seconds').asYears();
+    console.log("Age: "+ age);
+    console.log("age through moment: " +
+                moment.duration(age, 'seconds').asYears());
+    const mercAge = moment.duration(Math.floor(age * 0.24), 'seconds').asYears();
+    expect(mercAge).toBeCloseTo(ageInYears * 0.24, 5);
+    console.log("Mercury age in years: " + mercAge);
+    console.log("calculated age in years: " + spaceCalc.planetAge());
+    expect(spaceCalc.planetAge(birthDate, planet)).toBeCloseTo(mercAge);
+  });
+
+  it('should convert a duration in earth years to a duration in Venus years', function() {
+    expect();
+  });
+
+  it('should convert a duration in earth years to a duration in Mars years', function() {
+    expect();
+  });
+
+  it('should convert a duration in earth years to a duration in Jupiter years', function() {
+    expect();
+  });
+
+  it('should return life expectancy (duration in years) based on date of birth', function() {
+    expect();
+  });
+
+  it('should return life expectancy in years of the selected planet', function() {
+    expect();
+  });
+
 });
