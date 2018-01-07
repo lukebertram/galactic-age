@@ -13,8 +13,10 @@ describe('GalacticCalculator', function() {
   it('should generate its properties dynamically based on date of birth', function(){
     expect(spaceCalc.ageMercury).not.toBeUndefined();
     expect(spaceCalc.ageMercury).toEqual(spaceCalc.planetAge('Mercury'));
-    expect(spaceCalc.ageMercury).not.toBeUndefined();
-    expect(spaceCalc.ageMercury).not.toBeUndefined();
+    expect(spaceCalc.ageVenus).not.toBeUndefined();
+    expect(spaceCalc.ageVenus).toEqual(spaceCalc.planetAge('Venus'));
+
+    expect(spaceCalc.ageJupiter).toEqual(spaceCalc.planetAge('Jupiter'));
   });
 
   it('should convert an age in years to an age in seconds', function() {

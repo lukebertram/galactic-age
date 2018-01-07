@@ -8,6 +8,6 @@ $(document).ready(function(){
     const dob = $('#user-age').val();
     const calc = new GalacticCalculator(dob);
 
-    $('#output-display').append(calc.getDisplay());
+    $('#output-display').append(calc.render());
   });
 });

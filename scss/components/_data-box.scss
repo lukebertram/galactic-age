@@ -1,0 +1,24 @@
+.data-box{
+  background-color: #aaa;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+
+  .label{
+    padding: $data-box-pad;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: black;
+    font-size: 1.5em;
+  }
+
+  .data{
+    padding: $data-box-pad;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 1.5em;
+  }
+}

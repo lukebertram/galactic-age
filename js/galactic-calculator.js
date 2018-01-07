@@ -37,19 +37,19 @@ export class GalacticCalculator{
     let planetAge;
     switch (planet) {
       case 'Mercury':
-        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 0.24;
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() / 0.24;
         break;
 
       case 'Venus':
-        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 0.62;
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() / 0.62;
         break;
 
       case 'Mars':
-        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 1.88;
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() / 1.88;
         break;
 
       case 'Jupiter':
-        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 11.86;
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() / 11.86;
         break;
 
       default:
@@ -61,10 +61,21 @@ export class GalacticCalculator{
   };
 
   //returns the markup to render data
-  getDisplay(){
+  render(){
+    let output = `<h1>Galactic Data Dump!</h1>`;
+    output += this.renderDataBox('Age in Seconds: ', this.ageSeconds);
+    this.planets.forEach((planet)=>{
+      output += this.renderDataBox(`Age in ${planet} Years: `, this['age'+planet]);
+    });
+    return output;
+  }
+
+  renderDataBox(label, data){
     return `
-      <h1>Galactic Data Dump!</h1>
-      <
+      <div class="data-box">
+        <span class="label">${label}</span>
+        <span class="data">${data}</span>
+      </div>
       `;
   }
 }
