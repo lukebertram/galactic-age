@@ -22,24 +22,30 @@ export class GalacticCalculator{
   };
 
   planetAge(birthDate, planet){
-    const dob = moment(birthDate);
-    const now = moment();
-
+    const earthAgeSec = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
+    let planetAge;
     switch (planet) {
       case 'Mercury':
-
+        planetAge = moment.duration(earthAgeSec, 'seconds').asYears() * 0.24;
         break;
+
       case 'Venus':
-
+        planetAge = "venus";
         break;
+
       case 'Mars':
-
+        planetAge = "mars";
         break;
+
       case 'Jupiter':
-
+        planetAge = "jupiter";
         break;
+
       default:
-      return
-    };
+        planetAge = -1;
+        break;
+    }
+
+    return planetAge;
   };
 }

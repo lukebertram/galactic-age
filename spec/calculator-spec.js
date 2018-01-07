@@ -43,26 +43,40 @@ describe('GalacticCalculator', function() {
     const planet = 'Mercury';
     const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
     const ageInYears = moment.duration(age, 'seconds').asYears();
-    console.log("Age: "+ age);
-    console.log("age through moment: " +
-                moment.duration(age, 'seconds').asYears());
+    // console.log("Age: "+ age);
+    // console.log("age through moment: " +
+    //             moment.duration(age, 'seconds').asYears());
     const mercAge = moment.duration(Math.floor(age * 0.24), 'seconds').asYears();
     expect(mercAge).toBeCloseTo(ageInYears * 0.24, 5);
-    console.log("Mercury age in years: " + mercAge);
-    console.log("calculated age in years: " + spaceCalc.planetAge());
+    // console.log("Mercury age in years (conv. as seconds): " + mercAge);
+    // console.log("Mercury age in years (conv. as years): " + ageInYears * 0.24);
+    // console.log("calculated age in years: " + spaceCalc.planetAge());
     expect(spaceCalc.planetAge(birthDate, planet)).toBeCloseTo(mercAge);
   });
 
   it('should convert a duration in earth years to a duration in Venus years', function() {
-    expect();
+
+    const birthDate = '1985-10-26';
+    const planet = 'Venus';
+    const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
+    const venusAge = moment.duration(Math.floor(age * 0.62), 'seconds').asYears();
+    expect(spaceCalc.planetAge(birthDate, planet)).toBeCloseTo(venusAge);
   });
 
   it('should convert a duration in earth years to a duration in Mars years', function() {
-    expect();
+    const birthDate = '1985-10-26';
+    const planet = 'Mars';
+    const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
+    const marsAge = moment.duration(Math.floor(age * 1.88), 'seconds').asYears();
+    expect(spaceCalc.planetAge(birthDate, planet)).toBeCloseTo(marsAge);
   });
 
   it('should convert a duration in earth years to a duration in Jupiter years', function() {
-    expect();
+    const birthDate = '1985-10-26';
+    const planet = 'Jupiter';
+    const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
+    const jupiterAge = moment.duration(Math.floor(age * 11.86), 'seconds').asYears();
+    expect(spaceCalc.planetAge(birthDate, planet)).toBeCloseTo(jupiterAge);
   });
 
   it('should return life expectancy (duration in years) based on date of birth', function() {
