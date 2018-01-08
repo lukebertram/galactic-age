@@ -55,8 +55,8 @@ describe('GalacticCalculator', function() {
     // console.log("Age: "+ age);
     // console.log("age through moment: " +
     //             moment.duration(age, 'seconds').asYears());
-    const mercAge = moment.duration(Math.floor(age * 0.24), 'seconds').asYears();
-    expect(mercAge).toBeCloseTo(ageInYears * 0.24, 5);
+    const mercAge = moment.duration(Math.floor(age / 0.24), 'seconds').asYears();
+    expect(mercAge).toBeCloseTo(ageInYears / 0.24, 5);
     // console.log("Mercury age in years (conv. as seconds): " + mercAge);
     // console.log("Mercury age in years (conv. as years): " + ageInYears * 0.24);
     // console.log("calculated age in years: " + spaceCalc.planetAge());
@@ -68,7 +68,7 @@ describe('GalacticCalculator', function() {
     const birthDate = '1985-10-26';
     const planet = 'Venus';
     const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
-    const venusAge = moment.duration(Math.floor(age * 0.62), 'seconds').asYears();
+    const venusAge = moment.duration(Math.floor(age / 0.62), 'seconds').asYears();
     expect(spaceCalc.planetAge(planet)).toBeCloseTo(venusAge);
   });
 
@@ -76,7 +76,7 @@ describe('GalacticCalculator', function() {
     const birthDate = '1985-10-26';
     const planet = 'Mars';
     const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
-    const marsAge = moment.duration(Math.floor(age * 1.88), 'seconds').asYears();
+    const marsAge = moment.duration(Math.floor(age / 1.88), 'seconds').asYears();
     expect(spaceCalc.planetAge(planet)).toBeCloseTo(marsAge);
   });
 
@@ -84,7 +84,7 @@ describe('GalacticCalculator', function() {
     const birthDate = '1985-10-26';
     const planet = 'Jupiter';
     const age = Math.abs(moment(birthDate).diff(moment(), 'seconds'));
-    const jupiterAge = moment.duration(Math.floor(age * 11.86), 'seconds').asYears();
+    const jupiterAge = moment.duration(Math.floor(age / 11.86), 'seconds').asYears();
     expect(spaceCalc.planetAge(planet)).toBeCloseTo(jupiterAge);
   });
 
